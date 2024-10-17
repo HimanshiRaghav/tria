@@ -1,52 +1,41 @@
 import { useEffect } from 'react';
-import tw from 'tailwind-styled-components'
-import mapboxgl from '!mapbox-gl';
+import tw from 'tailwind-styled-components';
+import L from 'leaflet';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZGV2bGlucm9jaGEiLCJhIjoiY2t2bG82eTk4NXFrcDJvcXBsemZzdnJoYSJ9.aq3RAvhuRww7R_7q-giWpA';
+const MapComponent = ({ pickupCoordinates, dropoffCoordinates }) => {
+  useEffect(() => {
+    // Create a new map instance
+    const map = L.map('map').setView([39.39172, -99.29011], 3);
 
-export const Map = (props) => {
+    // Add a tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-    useEffect(() => {
-        const map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
-          center: [-99.29011, 39.39172],
-          zoom: 3,
-        });
-
-        if (props.pickupCoordinates) {
-            addToMap(map, props.pickupCoordinates);
-        };
-
-        if (props.dropoffCoordinates) {
-            addToMap(map, props.dropoffCoordinates);
-        };
-
-        if (props.pickupCoordinates && props.dropoffCoordinates) {
-            map.fitBounds([
-                props.pickupCoordinates, props.dropoffCoordinates
-            ], {
-                padding: 60
-            })
-        };
-
-    }, [props.pickupCoordinates, props.dropoffCoordinates]);
-
-    const addToMap = (map, coordinates) => {
-        const marker1 = new mapboxgl.Marker()
-        .setLngLat(coordinates)
-        .addTo(map);
+    // Function to add markers to the map
+    const addToMap = (coordinates) => {
+      L.marker([coordinates[1], coordinates[0]]).addTo(map);
     };
 
-    return (
-        <Wrapper id='map'>
-            
-        </Wrapper>
-    )
+    // Add pickup and dropoff markers
+    if (pickupCoordinates) addToMap(pickupCoordinates);
+    if (dropoffCoordinates) addToMap(dropoffCoordinates);
+
+    // Fit map bounds to include both markers
+    if (pickupCoordinates && dropoffCoordinates) {
+      const bounds = L.latLngBounds([
+        [pickupCoordinates[1], pickupCoordinates[0]],
+        [dropoffCoordinates[1], dropoffCoordinates[0]]
+      ]);
+      map.fitBounds(bounds, { padding: [60, 60] });
+    }
+  }, [pickupCoordinates, dropoffCoordinates]);
+
+  return <Wrapper id="map"></Wrapper>;
 };
 
-export default Map
+export default MapComponent;
 
 const Wrapper = tw.div`
-    flex-1 h-1/2
-`
+  flex-1 h-1/2
+`;

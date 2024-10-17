@@ -2,19 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-
-  apiKey: "AIzaSyDqEZ8XQh8W1UNMxYmV8ckUfHYvJp2ge1k",
-
-  authDomain: "uber-clone-ddb16.firebaseapp.com",
-
-  projectId: "uber-clone-ddb16",
-
-  storageBucket: "uber-clone-ddb16.appspot.com",
-
-  messagingSenderId: "1062829683379",
-
-  appId: "1:1062829683379:web:3057427abacc8c0f9ab6c6"
-
+  apiKey: "AIzaSyASyh2MfTWOIp4hM84O2HFrD5hEDq4WFAA",
+  authDomain: "upi2-0.firebaseapp.com",
+  projectId: "upi2-0",
+  storageBucket: "upi2-0.appspot.com",
+  messagingSenderId: "486102968259",
+  appId: "1:486102968259:web:4bdec6755fac4d77833f76",
+  measurementId: "G-6V12CRWTES"
 };
 
 // Initialize Firebase

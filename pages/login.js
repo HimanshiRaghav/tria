@@ -18,9 +18,9 @@ function Login() {
 
     return (
         <Wrapper>
-            <UberLogo src='https://i.ibb.co/ZMhy8ws/uber-logo.png' />
+            <UberLogo src='https://media.licdn.com/dms/image/v2/D4D12AQHnb3MZN2O0tA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1678430939336?e=1734566400&v=beta&t=8Q3OwBBwkTZdeOlYsET1eZHS6erW83tm5f0IRQOih_Q' />
             <Title>Login to access your account</Title>
-            <HeadImage src='https://i.ibb.co/CsV9RYZ/login-image.png' />
+            <HeadImage src='https://entrackr.com/storage/2018/05/UPI-2.jpg' />
             <SignInButton onClick={() => signInWithPopup(auth, provider)}>Sign in with Google</SignInButton>
         </Wrapper>
     )
